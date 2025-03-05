@@ -1,0 +1,47 @@
+@import url("../../../../public/css/public.css");
+
+/* 基础旋转效果 */
+.auv.spinner.base {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #007bff; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 双圆环旋转效果 */
+.auv.spinner.double-ring {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.auv.spinner.double-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #007bff;
+  border-color: #007bff transparent #007bff transparent;
+  animation: double-ring-spin 1.2s linear infinite;
+}
+
+@keyframes double-ring-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
