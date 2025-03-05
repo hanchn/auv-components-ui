@@ -1,0 +1,34 @@
+@import url("../../../../public/css/public.css");
+
+.auv.tag-component {
+  display: flex;
+  gap: 10px;
+}
+
+.auv.tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: var(--fonr-size-base);
+  color: #fff;
+}
+
+.auv.tag-default {
+  background-color: var(--default-color);
+}
+
+.auv.tag-primary {
+  background-color: var(--primary-color);
+}
+
+.auv.tag-success {
+  background-color: var(--success-color);
+}
+
+.auv.tag-warning {
+  background-color: var(--warning-color);
+}
+
+.auv.tag-danger {
+  background-color: var(--danger-color);
+}
