@@ -1,0 +1,97 @@
+@import url("../../../../public/css/public.css");
+
+.auv.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.auv.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background-color: #fff;
+}
+
+.auv.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.auv.product-image {
+  width: 100%;
+  height: auto;
+}
+
+.auv.product-info {
+  padding: 15px;
+  text-align: center;
+}
+
+.auv.product-title {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.auv.product-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.auv.product-price {
+  font-size: 16px;
+  color: #007bff;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.auv.add-to-cart-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auv.add-to-cart-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 骨架屏样式 */
+.auv.product-card.skeleton {
+  background-color: #f0f0f0;
+  height: 200px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #f0f0f0;
+  }
+  50% {
+    background-color: #e0e0e0;
+  }
+  100% {
+    background-color: #f0f0f0;
+  }
+}
+
+/* 响应式布局 */
+@media (min-width: 1200px) {
+  .auv.product-list {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .auv.product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
