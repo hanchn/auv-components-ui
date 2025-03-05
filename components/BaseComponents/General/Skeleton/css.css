@@ -1,0 +1,51 @@
+@import url("../../../../public/css/public.css");
+
+.auv.skeleton {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.auv.skeleton-header {
+  height: 150px;
+  background-color: #e0e0e0;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.auv.skeleton-content {
+  padding: 10px;
+}
+
+.auv.skeleton-line {
+  width: 60%;
+  height: 20px;
+  background-color: #e0e0e0;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.auv.skeleton-line:first-child {
+  width: 100%;
+}
+
+.auv.skeleton-line:last-child {
+  width: 30%;
+  margin-bottom: 0;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
