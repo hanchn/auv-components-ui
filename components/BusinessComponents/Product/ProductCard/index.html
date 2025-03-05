@@ -8,16 +8,57 @@
   </head>
   <body>
     <div class="auv product-card">
-      <img
-        src="product-image.jpg"
-        alt="Product Image"
-        class="auv product-image"
-      />
+      <div class="auv product-image-container">
+        <img
+          src="product-image.jpg"
+          alt="Product Image"
+          class="auv product-image"
+        />
+        <div class="auv product-badges">
+          <span class="auv badge discount">-20%</span>
+          <span class="auv badge new">New</span>
+        </div>
+        <div class="auv quick-actions">
+          <button class="auv action-btn wishlist" title="Add to Wishlist">
+            <i class="auv icon-heart"></i>
+          </button>
+          <button class="auv action-btn compare" title="Compare">
+            <i class="auv icon-compare"></i>
+          </button>
+          <button class="auv action-btn quick-view" title="Quick View">
+            <i class="auv icon-eye"></i>
+          </button>
+        </div>
+      </div>
       <div class="auv product-info">
-        <h2 class="auv product-title">产品名称</h2>
-        <p class="auv product-description">这是产品的简短描述。</p>
-        <span class="auv product-price">$99.99</span>
-        <button class="auv add-to-cart-btn">加入购物车</button>
+        <div class="auv product-category">Electronics</div>
+        <h2 class="auv product-title">Wireless Bluetooth Earbuds</h2>
+        <div class="auv product-rating">
+          <div class="auv stars">
+            <i class="auv icon-star filled"></i>
+            <i class="auv icon-star filled"></i>
+            <i class="auv icon-star filled"></i>
+            <i class="auv icon-star filled"></i>
+            <i class="auv icon-star-half"></i>
+          </div>
+          <span class="auv rating-count">(128)</span>
+        </div>
+        <p class="auv product-description">
+          High-quality wireless earbuds with noise cancellation and premium
+          sound quality.
+        </p>
+        <div class="auv price-container">
+          <span class="auv original-price">$129.99</span>
+          <span class="auv product-price">$99.99</span>
+        </div>
+        <div class="auv stock-status in-stock">
+          <i class="auv icon-check"></i>
+          <span>In Stock</span>
+        </div>
+        <button class="auv add-to-cart-btn">
+          <i class="auv icon-cart"></i>
+          <span>Add to Cart</span>
+        </button>
       </div>
     </div>
   </body>

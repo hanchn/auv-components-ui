@@ -76,9 +76,9 @@
 业务组件是针对商城场景的封装，直接可用于电商页面。
 
 ### **2.1 商品相关（Product）**
-- `ProductCard` 商品卡片
-- `ProductList` 商品列表
-- `ProductDetail` 商品详情
+- `ProductCard` 商品卡片 ✅
+- `ProductList` 商品列表 ✅
+- `ProductDetail` 商品详情 ✅
 - `SkuSelector` SKU 选择器
 - `PriceTag` 价格标签
 - `DiscountLabel` 折扣标签

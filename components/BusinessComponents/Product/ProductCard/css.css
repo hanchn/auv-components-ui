@@ -1,58 +1,200 @@
 @import url("../../../../public/css/public.css");
 
 .auv.product-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
   overflow: hidden;
   width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .auv.product-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.auv.product-image-container {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
 }
 
 .auv.product-image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.auv.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.auv.product-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.auv.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.auv.badge.discount {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.auv.badge.new {
+  background-color: #52c41a;
+  color: white;
+}
+
+.auv.quick-actions {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.3s ease;
+}
+
+.auv.product-card:hover .quick-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.auv.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.auv.action-btn:hover {
+  background: #1890ff;
+  color: white;
+  transform: scale(1.1);
 }
 
 .auv.product-info {
-  padding: 15px;
-  text-align: center;
+  padding: 16px;
+}
+
+.auv.product-category {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
 }
 
 .auv.product-title {
-  font-size: 18px;
-  margin: 10px 0;
-  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.auv.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.auv.stars {
+  color: #fadb14;
+  display: flex;
+  gap: 2px;
+}
+
+.auv.rating-count {
+  font-size: 12px;
+  color: #8c8c8c;
 }
 
 .auv.product-description {
   font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
+  color: #595959;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.auv.price-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.auv.original-price {
+  font-size: 14px;
+  color: #8c8c8c;
+  text-decoration: line-through;
 }
 
 .auv.product-price {
-  font-size: 16px;
-  color: #007bff;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f5222d;
+}
+
+.auv.stock-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.auv.stock-status.in-stock {
+  color: #52c41a;
 }
 
 .auv.add-to-cart-btn {
-  background-color: #007bff;
-  color: white;
+  width: 100%;
+  padding: 12px;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 6px;
+  background: #1890ff;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
 
 .auv.add-to-cart-btn:hover {
-  background-color: #0056b3;
+  background: #096dd9;
+  transform: translateY(-2px);
+}
+
+.auv.icon-heart,
+.auv.icon-compare,
+.auv.icon-eye,
+.auv.icon-cart,
+.auv.icon-check,
+.auv.icon-star {
+  font-size: 16px;
 }

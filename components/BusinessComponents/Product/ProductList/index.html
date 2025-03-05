@@ -7,26 +7,77 @@
     <link rel="stylesheet" href="./css.css" />
   </head>
   <body>
-    <div class="auv product-list">
-      <!-- 骨架屏示例 -->
-      <div class="auv product-card skeleton"></div>
-      <div class="auv product-card skeleton"></div>
-      <div class="auv product-card skeleton"></div>
-      <!-- 实际产品卡片 -->
-      <div class="auv product-card">
-        <img
-          src="product-image1.jpg"
-          alt="Product Image"
-          class="auv product-image"
-        />
-        <div class="auv product-info">
-          <h2 class="auv product-title">产品名称 1</h2>
-          <p class="auv product-description">这是产品 1 的简短描述。</p>
-          <span class="auv product-price">$99.99</span>
-          <button class="auv add-to-cart-btn">加入购物车</button>
+    <div class="auv product-list-container">
+      <div class="auv product-list-header">
+        <div class="auv product-list-filters">
+          <select class="auv filter-select">
+            <option value="">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="books">Books</option>
+          </select>
+          <select class="auv sort-select">
+            <option value="popularity">Sort by Popularity</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="newest">Newest First</option>
+          </select>
         </div>
       </div>
-      <!-- 可以添加更多产品卡片 -->
+
+      <div class="auv product-list">
+        <!-- 骨架屏示例 -->
+        <div class="auv product-card skeleton">
+          <div class="auv skeleton-image"></div>
+          <div class="auv product-info">
+            <div class="auv skeleton-title"></div>
+            <div class="auv skeleton-description"></div>
+            <div class="auv skeleton-price"></div>
+            <div class="auv skeleton-button"></div>
+          </div>
+        </div>
+        <div class="auv product-card skeleton">
+          <div class="auv skeleton-image"></div>
+          <div class="auv product-info">
+            <div class="auv skeleton-title"></div>
+            <div class="auv skeleton-description"></div>
+            <div class="auv skeleton-price"></div>
+            <div class="auv skeleton-button"></div>
+          </div>
+        </div>
+
+        <!-- 实际产品卡片 -->
+        <div class="auv product-card">
+          <div class="auv product-image-container">
+            <img
+              src="product-image1.jpg"
+              alt="Product Image"
+              class="auv product-image"
+              loading="lazy"
+            />
+          </div>
+          <div class="auv product-info">
+            <h2 class="auv product-title">高品质无线蓝牙耳机</h2>
+            <p class="auv product-description">
+              具有主动降噪功能的高端无线耳机，提供卓越的音质体验。
+            </p>
+            <div class="auv price-container">
+              <span class="auv original-price">¥299</span>
+              <span class="auv product-price">¥199</span>
+            </div>
+            <button class="auv add-to-cart-btn">
+              <span class="auv-icon cart-icon"></span>
+              加入购物车
+            </button>
+          </div>
+        </div>
+
+        <!-- 更多产品卡片 -->
+      </div>
+
+      <div class="auv load-more">
+        <button class="auv load-more-btn">加载更多</button>
+      </div>
     </div>
   </body>
 </html>
