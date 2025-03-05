@@ -6,20 +6,20 @@
 基础组件主要是无业务逻辑、可复用的 UI 组件，涵盖输入、展示、布局等。
 
 ### **1.1 通用组件（General）**
-- `Button` 按钮
-- `Icon` 图标
-- `Typography` 文字排版
+- `Button` 按钮 ✅
+- `Icon` 图标 ✅
+- `Typography` 文字排版 
 - `Divider` 分割线
 - `Avatar` 头像
 - `Badge` 徽章
-- `Tag` 标签
-- `Tooltip` 文字提示
-- `Popover` 气泡弹框
-- `Dialog`/`Modal` 对话框/模态框
-- `Notification` 消息通知
-- `Progress` 进度条
-- `Spinner` 加载动画
-- `Skeleton` 骨架屏
+- `Tag` 标签 ✅
+- `Tooltip` 文字提示 ✅
+- `Popover` 气泡弹框 ✅
+- `Dialog`/`Modal` 对话框/模态框 ✅
+- `Notification` 消息通知 ✅
+- `Progress` 进度条 ✅
+- `Spinner` 加载动画 ✅
+- `Skeleton` 骨架屏 ✅
 
 ### **1.2 布局组件（Layout）**
 - `Grid` 栅格系统

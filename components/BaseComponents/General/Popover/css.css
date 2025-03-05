@@ -1,0 +1,106 @@
+@import url("../../../../public/css/public.css");
+
+.auv.popover-container {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+}
+
+.auv.popover-trigger {
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.auv.popover-trigger:hover {
+  background-color: #0056b3;
+}
+
+.auv.popover-content {
+  visibility: hidden;
+  width: 220px;
+  background-color: #ffffff;
+  color: #333;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  z-index: 1000;
+  transition: visibility 0.3s, opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.auv.popover-container:hover .auv.popover-content {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.auv.popover-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.top .auv.popover-content {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top .auv.popover-arrow {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.right .auv.popover-content {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+}
+
+.right .auv.popover-arrow {
+  top: 50%;
+  left: -5px;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent transparent transparent #ffffff;
+}
+
+.bottom .auv.popover-content {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom .auv.popover-arrow {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+.left .auv.popover-content {
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+}
+
+.left .auv.popover-arrow {
+  top: 50%;
+  right: -5px;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent #ffffff transparent transparent;
+}
