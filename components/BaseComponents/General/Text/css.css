@@ -1,0 +1,50 @@
+@import url("../../../../public/css/public.css");
+
+.auv.text-component {
+  font-family: Arial, sans-serif;
+}
+
+.auv.text-title {
+  margin-bottom: 10px;
+}
+
+.auv.text-title h1 {
+  font-size: var(--font-size-h1);
+  font-weight: bold;
+}
+
+.auv.text-title h2 {
+  font-size: var(--font-size-h2);
+  font-weight: bold;
+}
+
+.auv.text-title h3 {
+  font-size: var(--font-size-h3);
+  font-weight: bold;
+}
+
+.auv.text-title h4 {
+  font-size: var(--font-size-h4);
+  font-weight: bold;
+}
+
+.auv.text-title h5 {
+  font-size: var(--font-size-h5);
+  font-weight: bold;
+}
+
+.auv.text-title h6 {
+  font-size: var(--font-size-h6);
+  font-weight: bold;
+}
+
+.auv.text-paragraph {
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.auv.text-basic {
+  font-size: var(--font-size-base);
+  color: #333;
+}
