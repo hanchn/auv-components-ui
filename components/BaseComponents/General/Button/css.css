@@ -1,0 +1,64 @@
+@import url("../../../../public/css/public.css");
+
+.auv.btn.default {
+  background-color: var(--default-color);
+  color: #fff;
+}
+
+.auv.btn.primary:hover {
+  background-color: var(--default-color-dark);
+}
+
+.auv.btn.primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.auv.btn.primary:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.auv.btn.secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.auv.btn.secondary:hover {
+  background-color: var(--secondary-color-dark);
+}
+
+.auv.btn.success {
+  background-color: var(--success-color);
+  color: #fff;
+}
+
+.auv.btn.success:hover {
+  background-color: var(--success-color-dark);
+}
+
+.auv.btn.warning {
+  background-color: var(--warning-color);
+  color: #fff;
+}
+
+.auv.btn.warning:hover {
+  background-color: var(--warning-color-dark);
+}
+
+.auv.btn.danger {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+.auv.btn.danger:hover {
+  background-color: var(--danger-color-dark);
+}
+
+.auv.btn.error {
+  background-color: var(--error-color);
+  color: #fff;
+}
+
+.auv.btn.error:hover {
+  background-color: var(--error-color-dark);
+}
