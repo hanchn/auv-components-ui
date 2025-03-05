@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification Component</title>
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
+    <div class="auv notification top-left">
+      <div class="auv notification-header">
+        <span>左上通知</span>
+        <button
+          class="auv close-btn"
+          onclick="this.parentElement.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="auv notification-body">这是左上角的通知内容。</div>
+    </div>
+
+    <div class="auv notification top-right">
+      <div class="auv notification-header">
+        <span>右上通知</span>
+        <button
+          class="auv close-btn"
+          onclick="this.parentElement.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="auv notification-body">这是右上角的通知内容。</div>
+    </div>
+
+    <div class="auv notification bottom-right">
+      <div class="auv notification-header">
+        <span>右下通知</span>
+        <button
+          class="auv close-btn"
+          onclick="this.parentElement.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="auv notification-body">这是右下角的通知内容。</div>
+    </div>
+
+    <div class="auv notification bottom-left">
+      <div class="auv notification-header">
+        <span>左下通知</span>
+        <button
+          class="auv close-btn"
+          onclick="this.parentElement.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="auv notification-body">这是左下角的通知内容。</div>
+    </div>
+  </body>
+</html>
