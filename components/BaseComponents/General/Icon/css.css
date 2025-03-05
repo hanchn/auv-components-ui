@@ -1,0 +1,17 @@
+@import url("../../../../public/css/public.css");
+
+.auv.icon-component {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.aiv.icon {
+  font-family: "FontAwesome", sans-serif; /* 使用FontAwesome作为示例 */
+  font-size: 24px;
+  color: #333;
+}
+
+.aiv.icon-sample:before {
+  content: "\f007"; /* 示例图标代码，表示用户图标 */
+}
