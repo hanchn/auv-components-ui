@@ -1,0 +1,38 @@
+@import url("../../../../public/css/public.css");
+
+.auv.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.auv.progress-bar-fill {
+  height: 20px;
+  width: 50%; /* 这里可以根据需要调整进度 */
+  border-radius: 8px;
+  background-size: 200% 100%;
+  animation: moveGradient 3s linear infinite;
+}
+
+.progress-primary {
+  background-image: linear-gradient(90deg, #007bff, #0056b3, #007bff);
+}
+
+.progress-success {
+  background-image: linear-gradient(90deg, #28a745, #1e7e34, #28a745);
+}
+
+.progress-danger {
+  background-image: linear-gradient(90deg, #dc3545, #c82333, #dc3545);
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
