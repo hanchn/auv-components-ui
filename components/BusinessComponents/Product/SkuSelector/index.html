@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKU Selector Component</title>
+    <link rel="stylesheet" href="./css.css" />
+  </head>
+  <body>
+    <div class="auv sku-selector">
+      <div class="auv sku-selector-header">
+        <div class="auv sku-selector-title">选择商品规格</div>
+      </div>
+      <div class="auv sku-selector-content">
+        <div class="auv sku-option-group">
+          <div class="auv sku-option-title">颜色</div>
+          <div class="auv sku-option-list">
+            <span class="auv sku-option-item">红色</span>
+            <span class="auv sku-option-item selected">蓝色</span>
+            <span class="auv sku-option-item disabled">黑色</span>
+          </div>
+        </div>
+        <div class="auv sku-option-group">
+          <div class="auv sku-option-title">尺码</div>
+          <div class="auv sku-option-list">
+            <span class="auv sku-option-item">S</span>
+            <span class="auv sku-option-item selected">M</span>
+            <span class="auv sku-option-item">L</span>
+            <span class="auv sku-option-item disabled">XL</span>
+          </div>
+        </div>
+      </div>
+      <div class="auv sku-selector-footer">
+        <div class="auv sku-quantity">
+          <span class="auv sku-quantity-label">数量</span>
+          <div class="auv sku-quantity-control">
+            <button class="auv sku-quantity-decrease">-</button>
+            <input
+              type="number"
+              class="auv sku-quantity-input"
+              value="1"
+              min="1"
+            />
+            <button class="auv sku-quantity-increase">+</button>
+          </div>
+        </div>
+        <div class="auv sku-actions">
+          <button class="auv sku-action-button primary">确定</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
