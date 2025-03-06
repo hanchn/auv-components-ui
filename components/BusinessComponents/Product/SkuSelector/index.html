@@ -9,24 +9,38 @@
   <body>
     <div class="auv sku-selector">
       <div class="auv sku-selector-header">
-        <div class="auv sku-selector-title">选择商品规格</div>
+        <h3 class="auv sku-selector-title">选择商品规格</h3>
+        <div class="auv sku-price">¥299.00</div>
       </div>
       <div class="auv sku-selector-content">
         <div class="auv sku-option-group">
           <div class="auv sku-option-title">颜色</div>
           <div class="auv sku-option-list">
-            <span class="auv sku-option-item">红色</span>
-            <span class="auv sku-option-item selected">蓝色</span>
-            <span class="auv sku-option-item disabled">黑色</span>
+            <button class="auv sku-option-item" data-value="red">
+              <span class="color-preview red"></span>
+              <span class="option-text">红色</span>
+            </button>
+            <button class="auv sku-option-item selected" data-value="blue">
+              <span class="color-preview blue"></span>
+              <span class="option-text">蓝色</span>
+            </button>
+            <button class="auv sku-option-item disabled" data-value="black">
+              <span class="color-preview black"></span>
+              <span class="option-text">黑色</span>
+            </button>
           </div>
         </div>
         <div class="auv sku-option-group">
           <div class="auv sku-option-title">尺码</div>
           <div class="auv sku-option-list">
-            <span class="auv sku-option-item">S</span>
-            <span class="auv sku-option-item selected">M</span>
-            <span class="auv sku-option-item">L</span>
-            <span class="auv sku-option-item disabled">XL</span>
+            <button class="auv sku-option-item" data-value="S">S</button>
+            <button class="auv sku-option-item selected" data-value="M">
+              M
+            </button>
+            <button class="auv sku-option-item" data-value="L">L</button>
+            <button class="auv sku-option-item disabled" data-value="XL">
+              XL
+            </button>
           </div>
         </div>
       </div>
@@ -34,18 +48,25 @@
         <div class="auv sku-quantity">
           <span class="auv sku-quantity-label">数量</span>
           <div class="auv sku-quantity-control">
-            <button class="auv sku-quantity-decrease">-</button>
+            <button class="auv sku-quantity-btn decrease" aria-label="减少数量">
+              −
+            </button>
             <input
               type="number"
               class="auv sku-quantity-input"
               value="1"
               min="1"
+              aria-label="商品数量"
             />
-            <button class="auv sku-quantity-increase">+</button>
+            <button class="auv sku-quantity-btn increase" aria-label="增加数量">
+              +
+            </button>
           </div>
         </div>
+        <div class="auv sku-stock">库存：999件</div>
         <div class="auv sku-actions">
-          <button class="auv sku-action-button primary">确定</button>
+          <button class="auv sku-action-btn secondary">加入购物车</button>
+          <button class="auv sku-action-btn primary">立即购买</button>
         </div>
       </div>
     </div>

@@ -1,0 +1,200 @@
+@import url("../../../../public/css/public.css");
+
+/* 价格标签基础样式 */
+.auv.price-tag {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-family, "Helvetica Neue", Arial, sans-serif);
+  margin: 12px 0;
+  padding: 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.auv.price-tag:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* 当前价格样式 */
+.auv.price-current {
+  font-size: var(--font-size-lg, 20px);
+  font-weight: bold;
+  color: var(--price-color, #e53935);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+/* 原价样式 */
+.auv.price-original {
+  font-size: var(--font-size-md, 16px);
+  color: var(--text-color-light, #999);
+  text-decoration: line-through;
+  position: relative;
+}
+
+/* 折扣标签样式 */
+.auv.price-discount-badge {
+  background-color: var(--discount-bg, #e53935);
+  color: var(--discount-text, white);
+  font-size: var(--font-size-sm, 12px);
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: var(--border-radius-sm, 4px);
+  display: inline-block;
+  position: relative;
+  animation: pulse 2s infinite;
+}
+
+/* 价格单位样式 */
+.auv.price-unit {
+  font-size: var(--font-size-sm, 12px);
+  color: var(--text-color-light, #999);
+}
+
+/* 价格标签样式 */
+.auv.price-label {
+  font-size: var(--font-size-md, 16px);
+  color: var(--text-color, #333);
+  font-weight: 500;
+}
+
+/* 折扣价格标签样式 */
+.auv.price-tag-discount {
+  position: relative;
+  border-left: 3px solid var(--discount-bg, #e53935);
+  padding-left: 12px;
+}
+
+/* 大尺寸价格标签 */
+.auv.price-tag-large {
+  padding: 12px 16px;
+}
+
+.auv.price-tag-large .auv.price-current {
+  font-size: var(--font-size-xl, 24px);
+}
+
+.auv.price-tag-large .auv.price-original {
+  font-size: var(--font-size-lg, 20px);
+}
+
+/* 小尺寸价格标签 */
+.auv.price-tag-small {
+  padding: 6px 10px;
+}
+
+.auv.price-tag-small .auv.price-current {
+  font-size: var(--font-size-md, 16px);
+}
+
+.auv.price-tag-small .auv.price-original {
+  font-size: var(--font-size-sm, 12px);
+}
+
+/* 悬停效果 */
+.auv.price-tag:hover .auv.price-current {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* 动画效果 */
+.auv.price-discount-badge {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 新增：限时特价样式 */
+.auv.price-tag-flash-sale {
+  background: linear-gradient(135deg, #fff8e1, #ffecb3);
+  border: 1px solid #ffd54f;
+  position: relative;
+  overflow: hidden;
+}
+
+.auv.price-tag-flash-sale::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background-color: #ff9800;
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.auv.price-countdown {
+  font-size: var(--font-size-sm, 12px);
+  color: #ff5722;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 新增：会员价格标签 */
+.auv.price-tag-member {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  border: 1px solid #ce93d8;
+}
+
+.auv.price-member-badge {
+  background-color: #9c27b0;
+  color: white;
+  font-size: var(--font-size-sm, 12px);
+  padding: 3px 8px;
+  border-radius: var(--border-radius-sm, 4px);
+  font-weight: bold;
+}
+
+/* 新增：分期付款价格标签 */
+.auv.price-tag-installment {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+}
+
+.auv.price-installment {
+  font-size: var(--font-size-sm, 12px);
+  color: #616161;
+  font-style: italic;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .auv.price-tag {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .auv.price-current {
+    font-size: var(--font-size-md, 16px);
+  }
+
+  .auv.price-original {
+    font-size: var(--font-size-sm, 12px);
+  }
+}
