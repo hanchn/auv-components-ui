@@ -4,7 +4,7 @@
   "description": "### 商城组件库目录",
   "main": "index.js",
   "scripts": {
-    "autoFile": "node ./scripts/autoFile.js"
+    "autoFile": "node ./scripts/generate-structure.js"
   },
   "author": "",
   "license": "ISC"
