@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>响应式网格布局配置示例</title>
+    <style>
+      :root {
+        /* 设置模块之间的间距（单位像素），可调整 */
+        --grid-gap: 10px;
+      }
+      /* 外层容器设置为10列×12行，宽度以屏宽为基准，高度根据比例自动计算 */
+      .container {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        width: 100vw;
+        height: calc((100vw / 10) * 12);
+        gap: var(--grid-gap);
+        box-sizing: border-box;
+        padding: var(--grid-gap);
+      }
+      /* 模块基础样式 */
+      .module {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 1.2em;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+      /* 每个模块使用不同颜色，便于区分 */
+      #module1 {
+        background-color: #3498db;
+      }
+      #module2 {
+        background-color: #e74c3c;
+      }
+      #module3 {
+        background-color: #2ecc71;
+      }
+      #module4 {
+        background-color: #9b59b6;
+      }
+      #module5 {
+        background-color: #f1c40f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="module" id="module1">模块1 (6x6)</div>
+      <div class="module" id="module2">模块2 (4x4)</div>
+      <div class="module" id="module3">模块3 (3x4)</div>
+      <div class="module" id="module4">模块4 (3x4)</div>
+      <div class="module" id="module5">模块5 (4x6)</div>
+    </div>
+
+    <script>
+      /* 定义配置规则，用户只需调整配置数据，而不用关心内部实现 */
+      const gridConfig = [
+        {
+          id: "module1",
+          columnStart: 1, // 从第1列开始
+          columnSpan: 6, // 占6列
+          rowStart: 1, // 从第1行开始
+          rowSpan: 6, // 占6行
+        },
+        {
+          id: "module2",
+          columnStart: 7, // 从第7列开始（正好占满右侧4列）
+          columnSpan: 4,
+          rowStart: 1,
+          rowSpan: 4,
+        },
+        {
+          id: "module3",
+          columnStart: 1, // 模块3放在左边
+          columnSpan: 3,
+          rowStart: 7, // 放在模块1下方
+          rowSpan: 4,
+        },
+        {
+          id: "module4",
+          columnStart: 4, // 模块4紧跟模块3右侧
+          columnSpan: 3,
+          rowStart: 7, // 与模块3在同一行
+          rowSpan: 4,
+        },
+        {
+          id: "module5",
+          columnStart: 7, // 模块5放在右侧区域
+          columnSpan: 4,
+          rowStart: 5, // 可调整起始行，使其与上面模块错开
+          rowSpan: 6,
+        },
+      ];
+
+      /* 黑盒函数：根据配置自动设置每个模块的位置 */
+      function applyGridConfiguration(config) {
+        config.forEach((item) => {
+          const el = document.getElementById(item.id);
+          if (el) {
+            el.style.gridColumn = `${item.columnStart} / span ${item.columnSpan}`;
+            el.style.gridRow = `${item.rowStart} / span ${item.rowSpan}`;
+          }
+        });
+      }
+
+      // 调用函数应用配置
+      applyGridConfiguration(gridConfig);
+    </script>
+  </body>
+</html>

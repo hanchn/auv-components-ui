@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>容器上报示例</title>
+    <style>
+      /* 示例样式：方便测试滚动效果 */
+      .container {
+        margin: 50px 0;
+        padding: 20px;
+        border: 1px solid #ccc;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 示例容器 -->
+    <div class="container">容器1</div>
+    <div class="container">容器2</div>
+    <div class="container">容器3</div>
+    <div class="container">容器4</div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 获取所有容器（假设容器统一使用 .container 类名）
+        const containers = document.querySelectorAll(".container");
+
+        // 为每个容器设置唯一属性 data-unique
+        containers.forEach((container, index) => {
+          container.setAttribute("data-unique", "container-" + index);
+        });
+
+        // 创建 IntersectionObserver 对象
+        const observer = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              // 当容器进入视野区域时（根据阈值判断）
+              if (entry.isIntersecting) {
+                const uniqueId = entry.target.getAttribute("data-unique");
+                // 模拟上报逻辑（此处可替换为 AJAX 请求等上报方法）
+                console.log("容器上报：", uniqueId);
+
+                // 避免重复上报，可以取消观察
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            // 可根据实际情况调整阈值，比如设置为0.5表示50%可见
+            threshold: 0.5,
+          }
+        );
+
+        // 开始观察每个容器
+        containers.forEach((container) => {
+          observer.observe(container);
+        });
+      });
+    </script>
+  </body>
+</html>

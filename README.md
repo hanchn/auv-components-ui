@@ -70,6 +70,12 @@
 - `Steps` 步骤条
 - `Anchor` 锚点
 
+
+
+### 交互组件（InteractionComponents）
+
+- `CardCarousel` 卡片轮播 
+
 ---
 
 ## **2. 业务组件（Business Components）**
@@ -297,6 +303,8 @@
 - `/maintenance` **维护页面**
 - `/legal` **法律条款**
 - `/sitemap` **站点地图**
+
+
 
 
 

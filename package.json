@@ -1,11 +1,12 @@
 {
-  "name": "auv-components-ui",
-  "version": "1.0.0",
-  "description": "### 商城组件库目录",
-  "main": "index.js",
-  "scripts": {
-    "autoFile": "node ./scripts/generate-structure.js"
-  },
-  "author": "",
-  "license": "ISC"
+	"name": "auv-components-ui",
+	"version": "1.0.0",
+	"description": "### 商城组件库目录",
+	"main": "index.js",
+	"scripts": {
+		"autoFile": "node ./scripts/generate-structure.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"projectId": "373"
 }

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>封装卡片触屏轮播（含回调、懒加载、屏占比及漏出卡片比例配置）</title>
+    <style>
+      /* 轮播容器：宽度由JS计算 */
+      #carousel {
+        position: relative;
+        overflow: hidden;
+      }
+      /* 内部容器采用 flex 布局，同时增加左右内边距，用于居中显示 */
+      .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      /* 每个卡片定位、通过JS设置尺寸，同时增加高度和 margin-top 的过渡效果 */
+      .carousel-card {
+        flex-shrink: 0;
+        position: relative;
+        transition: height 0.5s ease, margin-top 0.5s ease;
+      }
+      /* 图片样式：充满卡片 */
+      .carousel-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 轮播容器，图片地址通过 data-src 指定，初始时不会加载 -->
+    <div id="carousel">
+      <div class="carousel-container">
+        <!-- 此处卡片结构可以有多张 -->
+        <div class="carousel-card" data-index="0">
+          <img
+            data-src="https://cdn-review.cupshe.com/cmc-admin/2025_03_11/17_47_060/ddafef99-7578-4e05-9c9b-b74aa0051e66/CAA12C5B132SJ/1.jpg"
+            alt="卡片1"
+          />
+        </div>
+        <div class="carousel-card" data-index="1">
+          <img
+            data-src="https://cdn-review.cupshe.com/cmc-admin/2025_03_11/17_47_060/ddafef99-7578-4e05-9c9b-b74aa0051e66/CAA12C5B132SJ/1.jpg"
+            alt="卡片2"
+          />
+        </div>
+        <div class="carousel-card" data-index="2">
+          <img
+            data-src="https://cdn-review.cupshe.com/cmc-admin/2025_03_11/17_47_060/ddafef99-7578-4e05-9c9b-b74aa0051e66/CAA12C5B132SJ/1.jpg"
+            alt="卡片3"
+          />
+        </div>
+        <!-- 为实现无缝轮播，克隆卡片将在JS中动态添加 -->
+      </div>
+    </div>
+
+    <script>
+      (function (window) {
+        class CardCarousel {
+          /**
+           * @param {string} selector 轮播容器选择器
+           * @param {Object} options 配置项：
+           *    - ratio: 卡片宽高比（默认 16/9）
+           *    - transitionDuration: 动画时长（毫秒，默认500）
+           *    - threshold: 触摸滑动切换的最小距离（像素，默认50）
+           *    - containerMargin: 卡片容器距离网页左右的间距（像素，默认0）
+           *    - cardScreenRatio: 单张图占整个容器的比例（默认1，即全屏；设置为0.8时左右露出）
+           *    - peekScale: 当 cardScreenRatio 不为1时，左右漏出图的高度相对于主卡片的比例（默认0.7）
+           *    - onSlideChange: 切换完成后的回调函数，参数为 { currentIndex, direction, imageList, count }
+           */
+          constructor(selector, options = {}) {
+            this.container = document.querySelector(selector);
+            if (!this.container) {
+              console.error("未找到轮播容器");
+              return;
+            }
+            // 合并默认配置与用户传入的配置
+            this.options = Object.assign(
+              {
+                ratio: 16 / 9,
+                transitionDuration: 500,
+                threshold: 50,
+                containerMargin: 0,
+                cardScreenRatio: 1, // 单张图占比，1为全屏
+                peekScale: 0.7, // 左右漏出图高度相对于主图高度的比例
+                onSlideChange: null,
+              },
+              options
+            );
+
+            // 初始化容器左右间距和宽度
+            this.container.style.marginLeft =
+              this.options.containerMargin + "px";
+            this.container.style.marginRight =
+              this.options.containerMargin + "px";
+            this.container.style.width = `calc(100% - ${
+              this.options.containerMargin * 2
+            }px)`;
+
+            // 获取轮播内部容器和原始卡片（未克隆前的真实卡片）
+            this.wrapper = this.container.querySelector(".carousel-container");
+            this.originalCards = Array.from(this.wrapper.children);
+            this.total = this.originalCards.length;
+            // 初始化 lastRealIndex，表示当前真实卡片索引（0 开始）
+            this.lastRealIndex = 0;
+
+            // 为实现无缝轮播，克隆第一张和最后一张卡片，并修正 data-index 属性
+            this.setupInfinite();
+
+            // 当前内部索引从 1 开始（0 为克隆的最后一张）
+            this.currentIndex = 1;
+            // 绑定触摸拖拽事件
+            this.bindEvents();
+            // 初始化尺寸，并定位到第一个真实卡片
+            this.updateDimensions();
+            this.goTo(this.currentIndex, false);
+            // 初始化懒加载：加载当前卡片及其相邻图片
+            this.lazyLoadAround(this.currentIndex);
+            window.addEventListener("resize", () => this.updateDimensions());
+          }
+
+          // 克隆第一张和最后一张卡片，并设置克隆的 data-index（便于获取真实索引）
+          setupInfinite() {
+            const firstClone = this.originalCards[0].cloneNode(true);
+            const lastClone =
+              this.originalCards[this.originalCards.length - 1].cloneNode(true);
+            firstClone.dataset.index = "0";
+            lastClone.dataset.index = String(this.total - 1);
+            this.wrapper.insertBefore(lastClone, this.wrapper.firstChild);
+            this.wrapper.appendChild(firstClone);
+            this.cards = Array.from(this.wrapper.children);
+          }
+
+          // 根据容器宽度和配置项更新卡片尺寸，同时支持单卡屏占比配置
+          updateDimensions() {
+            const containerWidth = this.container.getBoundingClientRect().width;
+            // 根据配置计算单卡宽度（全屏时 cardScreenRatio 为 1）
+            const cardWidth = containerWidth * this.options.cardScreenRatio;
+            this.cardWidth = cardWidth; // 保存下来供其他方法使用
+            const cardHeight = cardWidth / this.options.ratio;
+            this.height = cardHeight;
+            this.container.style.height = cardHeight + "px";
+            // 设置每个卡片尺寸（初始统一为主卡片尺寸，后续根据 active 状态调整）
+            this.cards.forEach((card) => {
+              card.style.width = cardWidth + "px";
+              card.style.height = cardHeight + "px";
+              card.style.marginTop = "0px";
+            });
+            // 为了让中间卡片居中，在 wrapper 两侧增加内边距
+            const sidePadding = (containerWidth - cardWidth) / 2;
+            this.wrapper.style.paddingLeft = sidePadding + "px";
+            this.wrapper.style.paddingRight = sidePadding + "px";
+            // wrapper的宽度应包含所有卡片加上两侧内边距
+            this.wrapper.style.width =
+              this.cards.length * cardWidth +
+              (containerWidth - cardWidth) +
+              "px";
+            this.goTo(this.currentIndex, false);
+            this.updateCardStyles();
+          }
+
+          // 定位到指定内部索引的卡片，withTransition 为 true 时应用动画
+          goTo(index, withTransition = true) {
+            if (withTransition) {
+              this.wrapper.style.transition = `transform ${this.options.transitionDuration}ms ease`;
+            } else {
+              this.wrapper.style.transition = "none";
+            }
+            this.currentIndex = index;
+            // 计算偏移：每张卡片宽度为 cardWidth，外加 wrapper 内边距已将中间卡片居中
+            const offset = -this.currentIndex * this.cardWidth;
+            this.wrapper.style.transform = `translateX(${offset}px)`;
+          }
+
+          // 根据当前激活卡片更新卡片样式：
+          // 如果 cardScreenRatio !== 1，则左右临近的卡片高度按 peekScale 调整并垂直居中
+          updateCardStyles() {
+            if (this.options.cardScreenRatio === 1) {
+              // 全屏模式下，所有卡片都为主图尺寸
+              this.cards.forEach((card) => {
+                card.style.height = this.height + "px";
+                card.style.marginTop = "0px";
+              });
+              return;
+            }
+            const activeIndex = this.currentIndex;
+            const fullHeight = this.height;
+            const peekHeight = fullHeight * this.options.peekScale;
+            const verticalMargin = (fullHeight - peekHeight) / 2;
+            this.cards.forEach((card, index) => {
+              if (index === activeIndex) {
+                // 当前激活卡片使用全尺寸
+                card.style.height = fullHeight + "px";
+                card.style.marginTop = "0px";
+              } else if (
+                index === activeIndex - 1 ||
+                index === activeIndex + 1
+              ) {
+                // 左右相邻的卡片按比例缩放，并垂直居中
+                card.style.height = peekHeight + "px";
+                card.style.marginTop = verticalMargin + "px";
+              } else {
+                // 非当前及临近卡片，恢复全尺寸（通常不在可视区域）
+                card.style.height = fullHeight + "px";
+                card.style.marginTop = "0px";
+              }
+            });
+          }
+
+          // 绑定触摸拖拽事件实现轮播
+          bindEvents() {
+            let startX = 0;
+            let currentTranslate = 0;
+            let isDragging = false;
+
+            this.wrapper.addEventListener("touchstart", (e) => {
+              isDragging = true;
+              startX = e.touches[0].clientX;
+              currentTranslate = -this.currentIndex * this.cardWidth;
+              // 取消动画，方便拖动
+              this.wrapper.style.transition = "none";
+            });
+
+            this.wrapper.addEventListener("touchmove", (e) => {
+              if (!isDragging) return;
+              const currentX = e.touches[0].clientX;
+              const deltaX = currentX - startX;
+              this.wrapper.style.transform = `translateX(${
+                currentTranslate + deltaX
+              }px)`;
+            });
+
+            this.wrapper.addEventListener("touchend", (e) => {
+              isDragging = false;
+              const endX = e.changedTouches[0].clientX;
+              const deltaX = endX - startX;
+              if (Math.abs(deltaX) > this.options.threshold) {
+                if (deltaX < 0) {
+                  this.goTo(this.currentIndex + 1, true);
+                } else {
+                  this.goTo(this.currentIndex - 1, true);
+                }
+              } else {
+                this.goTo(this.currentIndex, true);
+              }
+            });
+
+            // 当动画结束后，修正克隆卡片，并触发回调、懒加载及更新卡片样式
+            this.wrapper.addEventListener("transitionend", () => {
+              let correctedIndex = this.currentIndex;
+              if (this.currentIndex === this.cards.length - 1) {
+                correctedIndex = 1;
+                this.goTo(correctedIndex, false);
+              } else if (this.currentIndex === 0) {
+                correctedIndex = this.cards.length - 2;
+                this.goTo(correctedIndex, false);
+              }
+              const newRealIndex = this.getRealIndex(correctedIndex);
+              let direction = "none";
+              if (
+                this.lastRealIndex !== undefined &&
+                this.lastRealIndex !== null
+              ) {
+                if (newRealIndex > this.lastRealIndex) {
+                  direction = "left";
+                } else if (newRealIndex < this.lastRealIndex) {
+                  direction = "right";
+                }
+              }
+              this.lastRealIndex = newRealIndex;
+              if (typeof this.options.onSlideChange === "function") {
+                this.options.onSlideChange({
+                  currentIndex: newRealIndex,
+                  direction: direction,
+                  imageList: this.getImageList(),
+                  count: this.total,
+                });
+              }
+              // 切换后进行懒加载
+              this.lazyLoadAround(this.currentIndex);
+              // 更新左右漏出卡片的样式
+              this.updateCardStyles();
+            });
+          }
+
+          // 将内部索引转换为真实索引（0 ~ total-1），内部索引 0 与 cards.length-1 为克隆卡片
+          getRealIndex(internalIndex) {
+            if (internalIndex === 0) {
+              return this.total - 1;
+            } else if (internalIndex === this.cards.length - 1) {
+              return 0;
+            } else {
+              return internalIndex - 1;
+            }
+          }
+
+          // 返回原始图片列表（图片地址数组）
+          getImageList() {
+            return this.originalCards.map((card) => {
+              const img = card.querySelector("img");
+              return img ? img.dataset.src || img.src : null;
+            });
+          }
+
+          // 懒加载当前卡片前一张、当前卡片和后一张的图片
+          lazyLoadAround(index) {
+            [index - 1, index, index + 1].forEach((i) => {
+              if (i >= 0 && i < this.cards.length) {
+                this.loadImageForCard(this.cards[i]);
+              }
+            });
+          }
+
+          // 加载指定卡片中的图片（如果尚未加载过）
+          loadImageForCard(card) {
+            const img = card.querySelector("img");
+            if (img && !img.dataset.loaded) {
+              const src = img.dataset.src;
+              if (src) {
+                img.src = src;
+                img.dataset.loaded = "true";
+              }
+            }
+          }
+
+          /**
+           * 允许在运行时更新配置项，并重新计算尺寸
+           * @param {Object} newOptions 新的配置项
+           */
+          updateOptions(newOptions = {}) {
+            this.options = Object.assign({}, this.options, newOptions);
+            this.container.style.marginLeft =
+              this.options.containerMargin + "px";
+            this.container.style.marginRight =
+              this.options.containerMargin + "px";
+            this.container.style.width = `calc(100% - ${
+              this.options.containerMargin * 2
+            }px)`;
+            this.updateDimensions();
+          }
+
+          // 公开方法：切换到下一张
+          next() {
+            this.goTo(this.currentIndex + 1, true);
+          }
+
+          // 公开方法：切换到上一张
+          prev() {
+            this.goTo(this.currentIndex - 1, true);
+          }
+        }
+
+        // 暴露全局变量，方便外部调用
+        window.CardCarousel = CardCarousel;
+      })(window);
+
+      // DOM加载完成后初始化轮播组件
+      document.addEventListener("DOMContentLoaded", () => {
+        const carousel = new CardCarousel("#carousel", {
+          ratio: 16 / 9,
+          transitionDuration: 500,
+          threshold: 50,
+          containerMargin: 20, // 设置轮播容器左右间距
+          cardScreenRatio: 0.8, // 单张图占屏幕宽度80%，左右露出
+          peekScale: 1, // 左右露出的图高度为主图的70%
+          onSlideChange: function (info) {
+            console.log("当前索引:", info.currentIndex);
+            console.log("滑动方向:", info.direction);
+            console.log("图片列表:", info.imageList);
+            console.log("图片总数:", info.count);
+          },
+        });
+
+        // 示例：通过按钮控制轮播（页面中可添加按钮来触发）
+        // document.querySelector('#nextBtn').addEventListener('click', () => carousel.next());
+      });
+    </script>
+  </body>
+</html>
