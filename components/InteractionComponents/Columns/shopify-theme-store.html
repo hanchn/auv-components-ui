@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose the right theme for your business | Shopify</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    
+    body {
+      color: #202223;
+      line-height: 1.5;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Header styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #e1e3e5;
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .logo {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .search-box {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid #c9cccf;
+      border-radius: 4px;
+    }
+    
+    .login-btn {
+      color: #5c5f62;
+    }
+    
+    .signup-btn {
+      background-color: #000;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    
+    /* Hero section */
+    .hero {
+      padding: 48px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .hero p {
+      color: #6d7175;
+      margin-bottom: 24px;
+      max-width: 600px;
+    }
+    
+    .cta-button {
+      background-color: #000;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      font-weight: 500;
+      display: inline-block;
+    }
+    
+    /* Theme sections */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    
+    .section-header {
+      margin-bottom: 32px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    /* Theme grid */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    
+    .theme-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    
+    .theme-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    .theme-image {
+      width: 100%;
+      height: 240px;
+      background-color: #f6f6f7;
+      position: relative;
+    }
+    
+    .theme-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .theme-info {
+      padding: 16px;
+    }
+    
+    .theme-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .theme-price {
+      color: #6d7175;
+      font-size: 14px;
+    }
+    
+    .color-options {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    
+    .color-option {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #e1e3e5;
+    }
+    
+    /* Features section */
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .feature-item {
+      padding: 16px;
+    }
+    
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .feature-desc {
+      color: #6d7175;
+      font-size: 14px;
+    }
+    
+    /* Testimonial */
+    .testimonial {
+      background-color: #f6f6f7;
+      padding: 32px;
+      margin: 48px 0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .testimonial-quote {
+      font-size: 18px;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    
+    .testimonial-author {
+      color: #6d7175;
+    }
+    
+    /* Theme showcase */
+    .theme-showcase {
+      background-color: #f6f6f7;
+      padding: 48px 0;
+    }
+    
+    .showcase-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .showcase-item {
+      border-radius: 8px;
+      overflow: hidden;
+      height: 200px;
+    }
+    
+    .showcase-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* CTA section */
+    .cta-section {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 64px 24px;
+    }
+    
+    .cta-section h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    
+    .cta-section p {
+      margin-bottom: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-button-light {
+      background-color: #008060;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      font-weight: 500;
+      display: inline-block;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: #fff;
+      padding: 48px 24px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-column h3 {
+      font-size: 14px;
+      margin-bottom: 16px;
+      color: #6d7175;
+      text-transform: uppercase;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      color: #fff;
+      font-size: 14px;
+    }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid #6d7175;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #6d7175;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <div class="logo">Shopify</div>
+      <nav class="nav-links">
+        <a href="#">Collections</a>
+        <a href="#">All themes</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="search-box">🔍 Search</div>
+      <a href="#" class="login-btn">Log in</a>
+      <a href="#" class="signup-btn">Sign up</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Choose the right theme for your business</h1>
+    <p>Look for a design that best suits your needs. Then customize how it appears to customers from there</p>
+    <a href="#" class="cta-button">Browse all themes</a>
+  </section>
+
+  <!-- Top Themes Section -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Top themes</h2>
+      <p>Our themes are popular because they look great, are easy to customize, and work well on any device.</p>
+    </div>
+    
+    <div class="theme-grid">
+      <!-- Theme 1 -->
+      <div class="theme-card">
+        <div class="theme-image">
+          <img src="https://via.placeholder.com/400x300/f6f6f7/808080?text=Dawn" alt="Dawn theme">
+        </div>
+        <div class="theme-info">
+          <h3 class="theme-name">Dawn</h3>
+          <p class="theme-price">Free</p>
+          <div class="color-options">
+            <span class="color-option" style="background-color: #e73c3e;"></span>
+            <span class="color-option" style="background-color: #3c64e7;"></span>
+            <span class="color-option" style="background-color: #3ce746;"></span>
+            <span class="color-option" style="background-color: #e7c93c;"></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Theme 2 -->
+      <div class="theme-card">
+        <div class="theme-image">
+          <img src="https://via.placeholder.com/400x300/f6f6f7/808080?text=Motion" alt="Motion theme">
+        </div>
+        <div class="theme-info">
+          <h3 class="theme-name">Motion</h3>
+          <p class="theme-price">$180</p>
+          <div class="color-options">
+            <span class="color-option" style="background-color: #3c64e7;"></span>
+            <span class="color-option" style="background-color: #e73c3e;"></span>
+            <span class="color-option" style="background-color: #3ce746;"></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Theme 3 -->
+      <div class="theme-card">
+        <div class="theme-image">
+          <img src="https://via.placeholder.com/400x300/f6f6f7/808080?text=Sense" alt="Sense theme">
+        </div>
+        <div class="theme-info">
+          <h3 class="theme-name">Sense</h3>
+          <p class="theme-price">$180</p>
+          <div class="color-options">
+            <span class="color-option" style="background-color: #9c3ce7;"></span>
+            <span class="color-option" style="background-color: #e73c3e;"></span>
+            <span class="color-option" style="background-color: #3ce746;"></span>
+            <span class="color-option" style="background-color: #e7c93c;"></span>
+            <span class="color-option" style="background-color: #3c64e7;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">What every theme gets you</h2>
+    </div>
+    
+    <div class="features-list">
+      <div class="feature-item">
+        <h3 class="feature-title">Built for commerce</h3>
+        <p class="feature-desc">Optimized for conversions, designed for sales, and built for growth.</p>
+      </div>
+      <div class="feature-item">
+        <h3 class="feature-title">Responsive and adaptable</h3>
+        <p class="feature-desc">Looks great on mobile, tablet, desktop, and every device in between.</p>
+      </div>
+      <div class="feature-item">
+        <h3 class="feature-title">Customizer support</h3>
+        <p class="feature-desc">Easy to customize with no coding required, just use the theme editor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Themes Section -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">New to the Theme Store</h2>
+      <p>The latest additions to our collection of premium themes.</p>
+    </div>
+    
+    <div class="theme-grid">
+      <!-- New Theme 1 -->
+      <div class="theme-card">
+        <div class="theme-image">
+          <img src="https://via.placeholder.com/400x300/f6f6f7/808080?text=Foster" alt

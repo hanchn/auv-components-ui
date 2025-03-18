@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>多实例布局配置示例</title>
+    <style>
+      /* 基本样式 */
+      .container {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+      .container div {
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        text-align: center;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 第一个容器实例 -->
+    <div id="container1" class="container">
+      <div>实例1 - Div 1</div>
+      <div>实例1 - Div 2</div>
+      <div>实例1 - Div 3</div>
+      <div>实例1 - Div 4</div>
+      <div>实例1 - Div 5</div>
+      <div>实例1 - Div 6</div>
+    </div>
+
+    <!-- 第二个容器实例 -->
+    <div id="container2" class="container">
+      <div>实例2 - Div 1</div>
+      <div>实例2 - Div 2</div>
+      <div>实例2 - Div 3</div>
+      <div>实例2 - Div 4</div>
+    </div>
+
+    <script>
+      /**
+       * 设置指定容器的布局和间距
+       * @param {string} containerId 容器的唯一 id
+       * @param {number} columns 每行显示的 div 个数
+       * @param {number | number[]} spacing 间距设置：
+       *    - 单个数字：上下左右均为该间距
+       *    - 数组 [vertical, horizontal]：垂直间距为 vertical，水平间距为 horizontal
+       *    - 数组 [top, right, bottom, left]：分别设置上、右、下、左的间距
+       */
+      function setLayout(containerId, columns, spacing) {
+        var container = document.getElementById(containerId);
+        if (!container) {
+          console.error("容器 " + containerId + " 不存在");
+          return;
+        }
+        var divs = container.children;
+
+        // 解析 spacing 参数
+        var top, right, bottom, left;
+        if (typeof spacing === "number") {
+          top = right = bottom = left = spacing;
+        } else if (Array.isArray(spacing)) {
+          if (spacing.length === 2) {
+            top = bottom = spacing[0];
+            right = left = spacing[1];
+          } else if (spacing.length === 4) {
+            top = spacing[0];
+            right = spacing[1];
+            bottom = spacing[2];
+            left = spacing[3];
+          } else {
+            // 其他情况默认使用第一个值
+            top = right = bottom = left = spacing[0] || 0;
+          }
+        } else {
+          top = right = bottom = left = 0;
+        }
+
+        // 如果 spacing 参数不是 4 个值时，利用 Flex 布局和 gap 属性实现间距控制
+        if (!(Array.isArray(spacing) && spacing.length === 4)) {
+          container.style.display = "flex";
+          container.style.flexWrap = "wrap";
+          container.style.rowGap = top + "px";
+          container.style.columnGap = right + "px";
+          // 计算每个元素的宽度：减去水平间距后均分
+          var elementWidthCalc =
+            "calc((100% - " + (columns - 1) * right + "px) / " + columns + ")";
+          for (var i = 0; i < divs.length; i++) {
+            divs[i].style.width = elementWidthCalc;
+          }
+        } else {
+          // 四个值情况时：上下左右间距单独设置，使用 margin 方式实现
+          // 为了使整体布局对齐，先给容器设置与子项 margin 相抵消的 padding
+          container.style.padding =
+            top + "px " + right + "px " + bottom + "px " + left + "px";
+          container.style.gap = "0";
+          // 每行 columns 个元素，中间水平总间距为 (columns - 1) * (left + right)
+          var elementWidthCalc =
+            "calc((100% - " +
+            (columns - 1) * (left + right) +
+            "px) / " +
+            columns +
+            ")";
+          for (var i = 0; i < divs.length; i++) {
+            divs[i].style.width = elementWidthCalc;
+            divs[i].style.margin =
+              top + "px " + right + "px " + bottom + "px " + left + "px";
+          }
+          // 调整每一行的首尾项，让布局更整齐
+          for (var i = 0; i < divs.length; i++) {
+            if (i % columns === 0) {
+              divs[i].style.marginLeft = "0px";
+            }
+            if ((i + 1) % columns === 0) {
+              divs[i].style.marginRight = "0px";
+            }
+          }
+        }
+      }
+
+      // 示例调用：
+      // 对 container1 实例，每行 3 个 div，均匀间距 10px
+      setLayout("container1", 3, 10);
+
+      // 对 container2 实例，每行 2 个 div，垂直间距 10px，水平间距 20px
+      setLayout("container2", 2, [10, 20]);
+
+      // 如果需要更多实例，只需为每个容器设置不同的 id，并调用 setLayout 配置即可，
+      // 例如：setLayout('container3', 4, [10,20,11,12]); // 上、右、下、左分别为 10, 20, 11, 12px
+    </script>
+  </body>
+</html>
